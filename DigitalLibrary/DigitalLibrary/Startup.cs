@@ -8,6 +8,7 @@ namespace DigitalLibrary
     {
         public void Configuration(IAppBuilder app)
         {
+            //test
             ConfigureAuth(app);
         }
     }
