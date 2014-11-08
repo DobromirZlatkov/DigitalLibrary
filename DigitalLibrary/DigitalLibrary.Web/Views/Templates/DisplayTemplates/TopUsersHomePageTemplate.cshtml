@@ -1,0 +1,9 @@
+﻿@model IEnumerable<DigitalLibrary.Web.Models.HomePageUserViewModel>
+
+<div class="row">
+    @foreach (var user in @Model)
+    {
+        @Html.DisplayForModel(@user)
+    }
+    @Html.DisplayForModel(@Model)
+</div>

@@ -29,6 +29,7 @@
 
         public IDbSet<Work> Works { get; set; }
 
-        public IDbSet<WorkType> WorkTypes { get; set; }
+       // public IDbSet<User> Users { get; set; }
+      //  public IDbSet<WorkType> WorkTypes { get; set; }
     }
 }

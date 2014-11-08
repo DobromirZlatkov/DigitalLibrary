@@ -12,19 +12,24 @@
         private DbContext context;
         private IDictionary<Type, object> repositories;
 
+        public LibraryData()
+            : this(new LibraryDbContext())
+        {
+        }
+
         public LibraryData(DbContext context)
         {
             this.context = context;
             this.repositories = new Dictionary<Type, object>();
         }
 
-        //public IRepository<User> Users
-        //{
-        //    get
-        //    {
-        //        return this.GetRepository<User>();
-        //    }
-        //}
+        public IRepository<User> Users
+        {
+            get
+            {
+                return this.GetRepository<User>();
+            }
+        }
 
 
         public IRepository<Author> Authors
@@ -67,13 +72,13 @@
             }
         }
 
-        public IRepository<WorkType> WorkTypes
-        {
-            get
-            {
-                return this.GetRepository<WorkType>();
-            }
-        }
+        //public IRepository<WorkType> WorkTypes
+        //{
+        //    get
+        //    {
+        //        return this.GetRepository<WorkType>();
+        //    }
+        //}
 
 
         public int SaveChanges()

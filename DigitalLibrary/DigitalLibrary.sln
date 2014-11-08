@@ -11,6 +11,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalLibrary.Models", "Di
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalLibrary.Data", "DigitalLibrary.Data\DigitalLibrary.Data.csproj", "{E78A1E3F-25CE-4AA0-9369-EFB875C95506}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UploadedFiles", "UploadedFiles", "{A419E97B-441A-4068-B7B2-369BA5EBF2E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Works", "Works", "{A5484C1F-9428-49B5-BEA6-45360BF2C8A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pictures", "Pictures", "{58F2960D-C0A8-413E-91DD-A8A3C2B02CD7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalLibraries", "ExternalLibraries", "{089A89BD-9D31-4D3C-A2B7-AEB02526812A}"
+	ProjectSection(SolutionItems) = preProject
+		ExternalLibraries\Kendo.Mvc.dll = ExternalLibraries\Kendo.Mvc.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +47,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A5484C1F-9428-49B5-BEA6-45360BF2C8A5} = {A419E97B-441A-4068-B7B2-369BA5EBF2E0}
+		{58F2960D-C0A8-413E-91DD-A8A3C2B02CD7} = {A419E97B-441A-4068-B7B2-369BA5EBF2E0}
 	EndGlobalSection
 EndGlobal

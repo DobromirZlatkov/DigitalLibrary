@@ -22,3 +22,31 @@ select,
 textarea {
     max-width: 280px;
 }
+.rating-container{
+    width:85%;
+    height:5px;
+    border:1px outset green;
+    margin-left: 10px;
+}
+.rating-bar{
+    background-color:green;
+    height:100%;
+    width:0;
+}
+.hoover-pop img{
+     width:100%;
+    height:60%;
+}
+.hoover-pop img:hover{
+    width:99%;
+    height:61%;
+}
+.home-page-list{
+    width:230px;
+    height:260px;
+}
+.list-page-list{
+    margin-bottom:20px;
+}
+
+

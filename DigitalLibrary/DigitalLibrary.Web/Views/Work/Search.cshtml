@@ -1,0 +1,14 @@
+﻿@model IEnumerable<DigitalLibrary.Web.Models.WorkListViewModel>
+
+@{
+    ViewBag.Title = "Search result";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@foreach (var work in @Model)
+{
+    @Html.DisplayFor(m => work, "WorkListViewModel")
+}
+
+<div class="row"></div>

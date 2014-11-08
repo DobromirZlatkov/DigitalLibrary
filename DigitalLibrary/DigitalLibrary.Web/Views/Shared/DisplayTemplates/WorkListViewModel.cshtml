@@ -1,0 +1,16 @@
+﻿@model DigitalLibrary.Web.Models.WorkListViewModel
+
+
+<div class="col-md-3 home-page-list">
+    <a class="btn btn-info hoover-pop" href="@Url.Action("Details", "Work", new { @Model.Id })">
+        <h3>@Model.Title</h3>
+        <img src="@Model.PictureLink" />
+    </a>
+    <a class="btn" href="@Url.Action("Details", "Author", new { @Model.AuthorId })">
+        @Model.AuthorName
+    </a>
+    @Model.Year
+    <div class="rating-container"><p class="rating-bar" style="width:@Model.LikeRate%"></p></div>
+    <div class="row"></div>
+</div>
+

@@ -1,6 +1,7 @@
 ﻿namespace DigitalLibrary.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
 
     public class Work
     {
@@ -17,14 +18,17 @@
 
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+
+        public string Tags { get; set; }
 
         public int Year { get; set; }
 
         public string ZipFileLink { get; set; }
 
-        public string PdfLink { get; set; }
-
+        [DefaultValue("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSQDIgjwuK3j9gJAGrIX6HlVnjoA6OL2qPhQRxlq0GjHxG88HvTX6BsDoz_")]
         public string PictureLink { get; set; }
 
         public int AuthorId { get; set; }

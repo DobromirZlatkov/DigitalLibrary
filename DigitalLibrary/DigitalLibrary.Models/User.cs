@@ -7,6 +7,7 @@
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using DigitalLibrary.Logic;
   
     public class User : IdentityUser
     {
@@ -33,9 +34,9 @@
 
         public double Rating 
         {
-            set
+            get
             {
-                value = CalculateRating(this.PositiveUploads, this.NegativeUploads);
+                return PercentageCalculator.CalculatePersentage(this.PositiveUploads, this.NegativeUploads);
             }
         }
 

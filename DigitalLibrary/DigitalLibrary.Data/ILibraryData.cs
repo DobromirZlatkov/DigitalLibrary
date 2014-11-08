@@ -5,7 +5,7 @@
 
     public interface ILibraryData
     {
-        //IRepository<User> Users { get; }
+        IRepository<User> Users { get; }
 
         IRepository<Author> Authors { get; }
 
@@ -17,7 +17,7 @@
 
         IRepository<Work> Works { get; }
 
-        IRepository<WorkType> WorkTypes { get; }
+      //  IRepository<WorkType> WorkTypes { get; }
 
         int SaveChanges();
     }
