@@ -1,26 +1,24 @@
 ﻿@{
     ViewBag.Title = "List";
-}
-@{
     var currentYear = DateTime.Now.Year;
 }
+
 <div class="row-fluid">
     @using (Html.BeginForm("Search", "Work", FormMethod.Post))
     {
         <div>
-            Search by Autor
+            Search by Model
         </div>
         @(Html.Kendo()
             .AutoComplete()
             .Name("authorsearch")
-            .DataTextField("AuthorName")
-            .MinLength(2)
-            .Placeholder("Enter Author")
+            .DataTextField("MatchResult")
+            .MinLength(1)
             .DataSource(data =>
             {
                 data.Read(read =>
                     {
-                        read.Action("GetWorkAuthorData", "Work")
+                        read.Action("GetWorkData", "Work")
                             .Data("onAdditionalData");
                     })
                     .ServerFiltering(true);
@@ -43,7 +41,7 @@
 
     <br />
     <div>
-        Search by price
+        Search by Year
     </div>
     @(Html.Kendo()
         .NumericTextBox()
@@ -75,24 +73,26 @@
 <script id="work-template" type="text/x-kendo-template">
     
     <div class="col-lg-4 list-page-list home-page-list">
-        <a class="btn btn-info hoover-pop" href="Work/Details/#: Id #">
+        <a class="btn btn-info hoover-pop" href="/Work/Download/#: Id #">
+            Download
+        </a>
+        <a class="btn btn-info hoover-pop" href="/Work/Details/#: Id #">
             <h3>#: Title #</h3>
-            <img src="#: PictureLink #" />
+            <img src="/${PictureLink}" />
         </a>
         <a class="btn" href="/Author/Details/#: AuthorId #">
             #: AuthorName #
         </a>
         #: Year #
-        <div class="rating-container"><p class="rating-bar" style="width:#: LikeRate #%"></p></div>
+        <div class="rating-container"><p class="rating-bar" style="width:#: LikesCount #%"></p></div>
         <div class="row"></div>
     </div>
 
 </script>
-
 <script>
     function onAdditionalData() {
         return {
-            text: $('#authorsearch').val()
+            text: $('#modelsearch').val()
         };
     }
 </script>

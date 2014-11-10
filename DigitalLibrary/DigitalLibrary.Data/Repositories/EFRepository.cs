@@ -1,6 +1,8 @@
 ﻿namespace DigitalLibrary.Data.Repositories
 {
     using System.Data.Entity;
+    using System.Data.Entity.Core;
+    using System.Data.Entity.Core.Objects;
     using System.Linq;
 
     public class EFRepository<T> : IRepository<T> where T : class

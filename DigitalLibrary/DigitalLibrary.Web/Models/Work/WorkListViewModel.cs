@@ -3,19 +3,17 @@
     using System;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Web;
     using System.Reflection;
     using System.IO;
 
     using DigitalLibrary.Models;
     using DigitalLibrary.Logic;
+   
 
     public class WorkListViewModel
     {
-       // private static string test = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase) ;
-
-       // private static string RootDirectoryPath = test.Substring("file:\\".Length, test.Length - ("DigitalLibrary.Web".Length + 5 + "\\Digit".Length));
-
-        //private static string fsdfasdfas = "fgdgsdfggdsf"; // test.Substring(0, test.Length - ("DigitalLibrary.Web".Length + 4));
+        //private static string serverPath = HttpContext.Current.Server.MapPath("~/~/");
 
         public static Expression<Func<Work, WorkListViewModel>> FromWork
         {
@@ -27,11 +25,10 @@
                     Title = w.Title,
                     Year = w.Year,
                     ZipFileLink = w.ZipFileLink,
-                    PictureLink = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRzIGCGi1ahFM9tIRKLWe2Sv1AmIQAoPcE5k6UcoWjxxNv-BQc6", //RootDirectoryPath + w.PictureLink,
+                    PictureLink =  w.PictureLink,
                     AuthorName = w.Author.Name,
                     AuthorId = w.AuthorId,
-                    PositiveLikes = w.Likes.Count(l => l.IsPositive),
-                    NegativeLikes = w.Likes.Count(l => !l.IsPositive),
+                    LikesCount = w.Likes.Count(),
                 };
             }
         }
@@ -50,16 +47,9 @@
 
         public int AuthorId{ get; set; }
 
-        private int PositiveLikes { get; set; }
+        public int LikesCount { get; set; }
 
-        private int NegativeLikes { get; set; }
+       // private int NegativeLikes { get; set; }
 
-        public double LikeRate 
-        {
-            get
-            {
-                return PercentageCalculator.CalculatePersentage(this.PositiveLikes, this.NegativeLikes);
-            } 
-        }
     }
 }

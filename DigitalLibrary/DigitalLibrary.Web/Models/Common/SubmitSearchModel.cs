@@ -7,7 +7,7 @@ namespace DigitalLibrary.Web.Models
 {
     public class SubmitSearchModel
     {
-        public string AuthorSearch { get; set; }
+        public string MatchSearch { get; set; }
 
         public string GenreSearch { get; set; }
 

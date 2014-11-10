@@ -6,8 +6,6 @@
     {
         public int Id { get; set; }
 
-        public bool IsPositive { get; set; }
-
         public string LikedById { get; set; }
 
         public virtual User LikedBy { get; set; }

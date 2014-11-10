@@ -22,9 +22,10 @@
 
         public string Description { get; set; }
 
-        public string Tags { get; set; }
-
         public int Year { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsApproved { get; set; }
 
         public string ZipFileLink { get; set; }
 

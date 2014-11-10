@@ -49,7 +49,7 @@
                 .ToList();
 
             var mostPopularWorks = this.Data.Works.All()
-                .OrderByDescending(w => w.Likes.Where(l => l.IsPositive == true).Count())
+                .OrderByDescending(w => w.Likes.Count())
                 .Take(NumberOfWorksPerPage)
                 .Select(WorkListViewModel.FromWork);
 

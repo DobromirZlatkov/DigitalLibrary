@@ -16,9 +16,6 @@
 
         public string Name { get; set; }
 
-        [DefaultValue("http://1.bp.blogspot.com/-yK2MsBw-qSQ/TW09QUzAOVI/AAAAAAAAAJ0/9SCB5LvhqdQ/s1600/writer%2B2-737732.gif")]
-        public string PictureUrl { get; set; }
-
         public virtual ICollection<Work> Works
         {
             get { return this.works; }

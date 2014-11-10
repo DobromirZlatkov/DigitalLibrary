@@ -13,5 +13,9 @@
         public string PostedById { get; set; }
 
         public virtual User PostedBy { get; set; }
+
+        public int WorkId { get; set; }
+
+        public virtual Work Work { get; set; }
     }
 }

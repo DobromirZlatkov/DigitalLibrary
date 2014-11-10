@@ -1,4 +1,6 @@
-﻿using DigitalLibrary.Models;
+﻿using DigitalLibrary.Logic;
+using DigitalLibrary.Models;
+using DigitalLibrary.Web.Models.Comments;
 using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Web;
 namespace DigitalLibrary.Web.Models
 {
     public class WorkDetailsViewModel
-    {     
+    {
         public static Expression<Func<Work, WorkDetailsViewModel>> FromWork
         {
             get
@@ -19,7 +21,6 @@ namespace DigitalLibrary.Web.Models
                     Id = w.Id,
                     Title = w.Title,
                     Description = w.Description,
-                    Tags = w.Tags,
                     Year = w.Year,
                     ZipFileLink = w.ZipFileLink,
                     PictureLink = w.PictureLink,
@@ -27,8 +28,8 @@ namespace DigitalLibrary.Web.Models
                     AuthorName = w.Author.Name,
                     UploadedBy = w.UploadedBy.UserName,
                     Genre = w.Genre.GenreName,
-                    LikesRate = w.Likes.Count(l => l.IsPositive) - w.Likes.Count(l => !l.IsPositive),
-                    Comments = w.Comments
+                    LikesCount = w.Likes.Count(),
+                    Comments = w.Comments.AsQueryable().Select(CommentViewModel.FromComment)
                 };
             }
         }
@@ -38,8 +39,6 @@ namespace DigitalLibrary.Web.Models
         public string Title { get; set; }
 
         public string Description { get; set; }
-
-        public string Tags { get; set; }
 
         public int Year { get; set; }
 
@@ -55,9 +54,17 @@ namespace DigitalLibrary.Web.Models
 
         public string Genre { get; set; }
 
-        public int LikesRate { get; set; }
+        public int LikesCount { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public IEnumerable<CommentViewModel> Comments { get; set; }
+
+        public double LikesRate
+        {
+            get
+            {
+                return PercentageCalculator.CalculatePersentage(this.LikesCount, 100);
+            } 
+        }
    
     }
 }

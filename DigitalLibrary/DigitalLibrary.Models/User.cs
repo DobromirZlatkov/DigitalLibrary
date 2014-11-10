@@ -12,15 +12,15 @@
     public class User : IdentityUser
     {
         //private ICollection<Work> works;
-        //private ICollection<Like> likes;
+        private ICollection<Like> likes;
         //private ICollection<Comment> comments;
 
-        //public User()
-        //{
+        public User()
+        {
         //    this.Works = new HashSet<Work>();
-        //    this.Likes = new HashSet<Like>();
+           this.Likes = new HashSet<Like>();
         //    this.Comments = new HashSet<Comment>();
-        //}
+        }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
@@ -53,18 +53,18 @@
         //    }
         //}
 
-        //public virtual ICollection<Like> Likes
-        //{
-        //    get
-        //    {
-        //        return this.likes;
-        //    }
+        public virtual ICollection<Like> Likes
+        {
+            get
+            {
+                return this.likes;
+            }
 
-        //    set
-        //    {
-        //        this.likes = value;
-        //    }
-        //}
+            set
+            {
+                this.likes = value;
+            }
+        }
 
         //public virtual ICollection<Comment> Comments
         //{
