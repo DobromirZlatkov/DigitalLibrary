@@ -3,13 +3,9 @@
     using System;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Reflection;
-    using System.IO;
     using System.Collections.Generic;
 
     using DigitalLibrary.Models;
-    using DigitalLibrary.Logic;
-    
 
     public class GenreViewModel
     {

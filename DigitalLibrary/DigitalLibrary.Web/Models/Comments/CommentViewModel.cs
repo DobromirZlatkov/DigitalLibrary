@@ -13,18 +13,17 @@
             {
                 return w => new CommentViewModel
                 {
-                   Content = w.Content,
-                   PostedBy = w.PostedBy.UserName,
-                   DatePosted = w.DatePosted
+                    Content = w.Content,
+                    PostedBy = w.PostedBy.UserName,
+                    DatePosted = w.DatePosted
                 };
             }
         }
 
         public string Content { get; set; }
-            
-        public string PostedBy{ get; set; }
 
-        public DateTime DatePosted {get;set;}
+        public string PostedBy { get; set; }
 
+        public DateTime DatePosted { get; set; }
     }
 }

@@ -11,7 +11,7 @@
         </div>
         @(Html.Kendo()
             .AutoComplete()
-            .Name("authorsearch")
+            .Name("MatchSearch")
             .DataTextField("MatchResult")
             .MinLength(1)
             .DataSource(data =>
@@ -84,7 +84,7 @@
             #: AuthorName #
         </a>
         #: Year #
-        <div class="rating-container"><p class="rating-bar" style="width:#: LikesCount #%"></p></div>
+        <div class="rating-container"><p class="rating-bar" style="width:#:LikesCount#%"></p></div>
         <div class="row"></div>
     </div>
 
@@ -92,7 +92,7 @@
 <script>
     function onAdditionalData() {
         return {
-            text: $('#modelsearch').val()
+            text: $('#MatchSearch').val()
         };
     }
 </script>

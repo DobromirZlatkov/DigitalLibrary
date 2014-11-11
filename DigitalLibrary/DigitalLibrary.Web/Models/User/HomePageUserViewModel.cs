@@ -1,12 +1,10 @@
-﻿using DigitalLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-
-namespace DigitalLibrary.Web.Models
+﻿namespace DigitalLibrary.Web.Models
 {
+    using System;
+    using System.Linq.Expressions;
+
+    using DigitalLibrary.Models;
+
     public class HomePageUserViewModel
     {
         public static Expression<Func<User, HomePageUserViewModel>> FromUser

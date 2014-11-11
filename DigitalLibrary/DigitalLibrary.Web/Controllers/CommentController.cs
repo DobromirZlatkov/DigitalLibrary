@@ -1,15 +1,15 @@
-﻿using DigitalLibrary.Data;
-using DigitalLibrary.Web.Models.Comments;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using DigitalLibrary.Models;
-
-namespace DigitalLibrary.Web.Controllers
+﻿namespace DigitalLibrary.Web.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+
+    using Microsoft.AspNet.Identity;
+
+    using DigitalLibrary.Data;
+    using DigitalLibrary.Models;
+    using DigitalLibrary.Web.Models.Comments;
+
     public class CommentController : BaseController
     {
         public CommentController(ILibraryData data)
@@ -37,7 +37,8 @@ namespace DigitalLibrary.Web.Controllers
                 this.Data.SaveChanges();
 
                 var viewModel = new CommentViewModel { PostedBy = username, Content = commentModel.Content };
-                return PartialView("_CommentPartial", viewModel);
+
+                return this.PartialView("_CommentPartial", viewModel);
             }
 
             return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, ModelState.Values.First().ToString());

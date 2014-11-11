@@ -1,57 +1,34 @@
 ﻿namespace DigitalLibrary.Models
 {
-
     using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+
     using DigitalLibrary.Logic;
-  
+
     public class User : IdentityUser
     {
-        //private ICollection<Work> works;
         private ICollection<Like> likes;
-        //private ICollection<Comment> comments;
 
         public User()
         {
-        //    this.Works = new HashSet<Work>();
-           this.Likes = new HashSet<Like>();
-        //    this.Comments = new HashSet<Comment>();
-        }
-
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
-        {
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            return userIdentity;
+            this.Likes = new HashSet<Like>();
         }
 
         public int PositiveUploads { get; set; }
 
         public int NegativeUploads { get; set; }
 
-        public double Rating 
+        public double Rating
         {
             get
             {
-                return PercentageCalculator.CalculatePersentage(this.PositiveUploads, this.NegativeUploads);
+                return PercentageCalculator.CalculatePersentage(this.NegativeUploads, this.PositiveUploads);
             }
         }
-
-        //public virtual ICollection<Work> Works
-        //{
-        //    get
-        //    {
-        //        return this.works;
-        //    }
-
-        //    set
-        //    {
-        //        this.works = value;
-        //    }
-        //}
 
         public virtual ICollection<Like> Likes
         {
@@ -66,29 +43,10 @@
             }
         }
 
-        //public virtual ICollection<Comment> Comments
-        //{
-        //    get
-        //    {
-        //        return this.comments;
-        //    }
-
-        //    set
-        //    {
-        //        this.comments = value;
-        //    }
-        //}
-
-        private double CalculateRating(int positiveUploads, int negativeUploads)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
-            double allUploads = (double)positiveUploads + (double)negativeUploads;
-            if(allUploads > 0)
-            {
-                double rating = ((double)negativeUploads / allUploads) * 100;
-                return rating;
-            }
-
-            return 0;
+            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            return userIdentity;
         }
     }
 }

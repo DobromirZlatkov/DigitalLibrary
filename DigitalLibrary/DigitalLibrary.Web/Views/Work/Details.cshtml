@@ -39,21 +39,20 @@
     }
    
 </div>
-
+<div>
 @if (User.Identity.IsAuthenticated)
 {
-    using (Ajax.BeginForm("PostComment", "Comment", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "Comments" , OnSuccess="clearText"}))
-    {
-        @Html.AntiForgeryToken()
+    using (Ajax.BeginForm("PostComment", "Comment", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "Comments", OnSuccess = "clearText" }))
+    { 
         @Html.Hidden("WorkId", Model.Id)
         @Html.TextArea("Content", new { id="comment-content-textarea"})
+        @Html.AntiForgeryToken()
         <input type="submit" value="Submit comment" />
     }
 }
 
 </div>
 @section scripts{
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script>
 
         function clearText() {

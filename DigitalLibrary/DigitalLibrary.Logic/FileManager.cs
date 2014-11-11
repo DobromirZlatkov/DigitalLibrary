@@ -1,30 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using System.IO;
-using System.IO.Compression;
-
-namespace DigitalLibrary.Logic
+﻿namespace DigitalLibrary.Logic
 {
+    using System.IO;
+    using System.Web;
+
     public static class FileManager
     {
-        
         public static void DeleteFile(string path)
         {
             var fullPath = HttpContext.Current.Server.MapPath("~/" + path);
             var dir = new DirectoryInfo(fullPath);
-            dir.Delete(true);
+            if (dir.Exists)
+            {
+                dir.Delete(true);
+            }
         }
-
 
         public static bool CheckIfFileExists(string filePath)
         {
-           return File.Exists(HttpContext.Current.Server.MapPath("~/" + filePath));
+            return File.Exists(HttpContext.Current.Server.MapPath("~/" + filePath));
         }
 
         public static void CreateFolderIfDoesntExists(string foderPath)
@@ -62,14 +55,13 @@ namespace DigitalLibrary.Logic
                 }
                 else if (CheckIfFileIsZipped(file))
                 {
-
                     var fileSaveName = fileName + extension;
 
                     var path = Path.Combine(HttpContext.Current.Server.MapPath("~/" + uploadPath + "/"), fileSaveName);
 
-                    file.SaveAs(path); 
+                    file.SaveAs(path);
                 }
-            }  
+            }
         }
 
         public static bool CheckIfFileIsPicture(HttpPostedFileBase file)
@@ -77,8 +69,8 @@ namespace DigitalLibrary.Logic
             var extension = Path.GetExtension(file.FileName);
             extension = extension.ToLower();
 
-            if (extension == ".jpg" 
-                || extension ==".png" 
+            if (extension == ".jpg"
+                || extension == ".png"
                 || extension == ".jpeg"
                 || extension == ".gif")
             {
@@ -93,9 +85,7 @@ namespace DigitalLibrary.Logic
             var extension = Path.GetExtension(file.FileName);
             extension = extension.ToLower();
 
-            if (extension == ".zip"
-                || extension == ".rar"
-                )
+            if (extension == ".zip" || extension == ".rar")
             {
                 return true;
             }

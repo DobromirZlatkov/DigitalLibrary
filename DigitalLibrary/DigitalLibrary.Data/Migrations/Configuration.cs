@@ -18,11 +18,28 @@ namespace DigitalLibrary.Data.Migrations
 
         protected override void Seed(LibraryDbContext context)
         {
+
+            if (context.Roles.Any())
+            {
+                return;
+            }
+            context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+            {
+                Name = "trusted"
+            });
+            context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+            {
+                Name = "admin"
+            });
+            context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+            {
+                Name = "non-trusted"
+            });
+            context.SaveChanges();
             //if (context.Authors.Any())
             //{
             //    return;
             //}
-
             //// var userId = "Archaeology";
             //var User = new User { Email = "Pesho2@abv.bg", UserName = "Pesho2@abv.bg" };
             

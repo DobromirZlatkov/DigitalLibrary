@@ -7,11 +7,14 @@
 
     public abstract class BaseController : Controller
     {
-        protected ILibraryData Data { get; set; }
-
         public BaseController(ILibraryData data)
         {
             this.Data = data;
+            this.IdentityManager = new IdentityManager();
         }
+
+        protected ILibraryData Data { get; set; }
+
+        protected IdentityManager IdentityManager { get; set; }
     }
 }

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace DigitalLibrary.Web.Models
+﻿namespace DigitalLibrary.Web.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class WorkCreateViewModel
     {
         [Required]
@@ -20,10 +16,9 @@ namespace DigitalLibrary.Web.Models
         public int Year { get; set; }
 
         [Required]
-        public int Author { get; set; }
+        public string Author { get; set; }
 
         [Required]
-        public int Genre { get; set; }
-
+        public string Genre { get; set; }
     }
 }

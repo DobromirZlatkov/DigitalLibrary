@@ -3,13 +3,8 @@
     using System;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Web;
-    using System.Reflection;
-    using System.IO;
 
     using DigitalLibrary.Models;
-    using DigitalLibrary.Logic;
-   
 
     public class WorkListViewModel
     {
@@ -48,8 +43,5 @@
         public int AuthorId{ get; set; }
 
         public int LikesCount { get; set; }
-
-       // private int NegativeLikes { get; set; }
-
     }
 }

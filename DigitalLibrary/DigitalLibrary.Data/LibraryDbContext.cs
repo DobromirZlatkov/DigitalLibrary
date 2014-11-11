@@ -14,11 +14,6 @@
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<LibraryDbContext, Configuration>());
         }
 
-        public static LibraryDbContext Create()
-        {
-            return new LibraryDbContext();
-        }
-
         public IDbSet<Author> Authors { get; set; }
 
         public IDbSet<Comment> Comments { get; set; }
@@ -29,7 +24,9 @@
 
         public IDbSet<Work> Works { get; set; }
 
-       // public IDbSet<User> Users { get; set; }
-      //  public IDbSet<WorkType> WorkTypes { get; set; }
+        public static LibraryDbContext Create()
+        {
+            return new LibraryDbContext();
+        }
     }
 }

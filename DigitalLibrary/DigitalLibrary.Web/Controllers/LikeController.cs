@@ -1,17 +1,13 @@
-﻿using DigitalLibrary.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-using Microsoft.AspNet.Identity;
-using DigitalLibrary.Models;
-using System.Net;
-using System.Data.Entity.Infrastructure;
-
-namespace DigitalLibrary.Web.Controllers
+﻿namespace DigitalLibrary.Web.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
+
+    using Microsoft.AspNet.Identity;
+
+    using DigitalLibrary.Data;
+    using DigitalLibrary.Models;
+
     public class LikeController : BaseController
     {
         public LikeController(ILibraryData data)
@@ -38,7 +34,7 @@ namespace DigitalLibrary.Web.Controllers
                 this.Data.SaveChanges();
             }
 
-            return Content(workVotedFor.Likes.Count().ToString());
+            return this.Content(workVotedFor.Likes.Count().ToString());
         }
 
         public ActionResult Dislike(int id)
@@ -56,7 +52,7 @@ namespace DigitalLibrary.Web.Controllers
 
             var workVotedFor = this.Data.Works.Find(id);
 
-            return Content(workVotedFor.Likes.Count().ToString());
+            return this.Content(workVotedFor.Likes.Count().ToString());
         }
     }
 }

@@ -1,15 +1,14 @@
-﻿using DigitalLibrary.Logic;
-using DigitalLibrary.Models;
-using DigitalLibrary.Web.Models.Comments;
-using Microsoft.Ajax.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Web;
-
-namespace DigitalLibrary.Web.Models
+﻿namespace DigitalLibrary.Web.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+
+    using DigitalLibrary.Logic;
+    using DigitalLibrary.Models;
+    using DigitalLibrary.Web.Models.Comments;
+
     public class WorkDetailsViewModel
     {
         public static Expression<Func<Work, WorkDetailsViewModel>> FromWork
@@ -65,6 +64,5 @@ namespace DigitalLibrary.Web.Models
                 return PercentageCalculator.CalculatePersentage(this.LikesCount, 100);
             } 
         }
-   
     }
 }

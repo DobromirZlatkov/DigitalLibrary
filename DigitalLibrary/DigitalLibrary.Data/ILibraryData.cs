@@ -17,8 +17,6 @@
 
         IRepository<Work> Works { get; }
 
-      //  IRepository<WorkType> WorkTypes { get; }
-
         int SaveChanges();
     }
 }

@@ -31,7 +31,6 @@
             }
         }
 
-
         public IRepository<Author> Authors
         {
             get
@@ -71,15 +70,6 @@
                 return this.GetRepository<Work>();
             }
         }
-
-        //public IRepository<WorkType> WorkTypes
-        //{
-        //    get
-        //    {
-        //        return this.GetRepository<WorkType>();
-        //    }
-        //}
-
 
         public int SaveChanges()
         {

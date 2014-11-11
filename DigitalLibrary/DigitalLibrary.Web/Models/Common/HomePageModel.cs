@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace DigitalLibrary.Web.Models
+﻿namespace DigitalLibrary.Web.Models
 {
+    using System.Collections.Generic;
+
     public class HomePageModel
     {
         public IEnumerable<WorkListViewModel> MostPopularWorks { get; set; }

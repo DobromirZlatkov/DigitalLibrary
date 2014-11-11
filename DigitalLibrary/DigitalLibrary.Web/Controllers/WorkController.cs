@@ -2,21 +2,20 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
-    using System.IO;
 
     using Microsoft.AspNet.Identity;
 
-    using Kendo.Mvc.UI;
     using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
 
     using DigitalLibrary.Data;
-    using DigitalLibrary.Web.Models;
-    using DigitalLibrary.Models;
     using DigitalLibrary.Logic;
-    using System.ComponentModel.DataAnnotations;
+    using DigitalLibrary.Models;
+    using DigitalLibrary.Web.Models;
 
     public class WorkController : BaseController
     {
@@ -24,50 +23,22 @@
         private const int StartWorkYear = 1800;
         private static int currentYear = DateTime.Now.Year;
 
-
         public WorkController(ILibraryData data)
             : base(data)
         {
         }
 
-        // GET: Work
-        private IQueryable<WorkListViewModel> GetAllWorks()
-        {
-            var allWorks = this.Data.Works
-                .All()
-                .Select(WorkListViewModel.FromWork);
-
-            return allWorks;
-        }
-
-
-
-        private void LoadDataToViewBag()
-        {
-            IEnumerable<SelectListItem> authors = this.Data.Authors.All().Select(
-               a => new SelectListItem { Value = a.Id.ToString(), Text = a.Name });
-
-            IEnumerable<SelectListItem> genres = this.Data.Genres.All().Select(
-              a => new SelectListItem { Value = a.Id.ToString(), Text = a.GenreName });
-
-            ViewBag.Year = new SelectList(Enumerable.Range(StartWorkYear, currentYear - StartWorkYear));
-
-            ViewBag.Author = authors;
-
-            ViewBag.Genre = genres;
-        }
-
         public ActionResult List()
         {
-            return View();
+            return this.View();
         }
 
         [HttpGet]
         [Authorize]
         public ActionResult Create()
         {
-            LoadDataToViewBag();
-            return View();
+            this.LoadDataToViewBag();
+            return this.View();
         }
 
         public ActionResult Details(int id)
@@ -77,7 +48,7 @@
             var viewModel = this.Data.Works.All().Where(x => x.Id == id)
                 .Select(WorkDetailsViewModel.FromWork).FirstOrDefault();
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public FileResult Download(int id)
@@ -86,69 +57,40 @@
 
             if (!FileManager.CheckIfFileExists(work.ZipFileLink))
             {
-                TempData["error"] = "File not found";
-                Response.Redirect("/work/list");
+                this.TempData["error"] = "File not found";
+                this.Response.Redirect("/work/list");
                 return null;
             }
 
             var fileBytes = FileManager.DownloadFile(work.ZipFileLink);
 
-            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, work.Title + ".zip");
+            return this.File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, work.Title + ".zip");
         }
 
         [Authorize]
-        public ActionResult Upload(WorkCreateViewModel createModel)
+        public ActionResult Upload(WorkCreateViewModel createModel, ICollection<HttpPostedFileBase> files)
         {
             if (ModelState.IsValid)
             {
                 var currentUserId = User.Identity.GetUserId();
                 var currentUser = this.Data.Users.Find(currentUserId);
+                var genre = this.Data.Genres.All().Where(g => g.GenreName == createModel.Genre).FirstOrDefault();
+                var author = this.Data.Authors.All().Where(g => g.Name == createModel.Author).FirstOrDefault();
 
-                var genre = this.Data.Genres.Find(createModel.Genre);
-                var author = this.Data.Authors.Find(createModel.Author);
-
-                var workUploadPath = "UploadedFiles/" + genre.GenreName + "/" + author.Name + "/works/" + createModel.Title + "/";
-                var zipFileLink = workUploadPath + createModel.Title + ".zip";
-                var pictureFileLink = string.Empty;
-
-                FileManager.CreateFolderIfDoesntExists("UploadedFiles/" + genre.GenreName);
-                FileManager.CreateFolderIfDoesntExists("UploadedFiles/" + genre.GenreName + "/" + author.Name);
-                FileManager.CreateFolderIfDoesntExists("UploadedFiles/" + genre.GenreName + "/" + author.Name + "/works/");
-                FileManager.CreateFolderIfDoesntExists("UploadedFiles/" + genre.GenreName + "/" + author.Name + "/works/" + createModel.Title + "/");
-
-                if (Request.Files.Count > 0 && Request.Files.Count < 3)
+                foreach (var file in files)
                 {
-                    var picutre = Request.Files[0];
-
-                    var work = Request.Files[1];
-
-                    if (FileManager.CheckIfFileIsPicture(picutre))
-                    {
-                        pictureFileLink = workUploadPath + createModel.Title + ".png";
-                        FileManager.UploadFile(picutre, createModel.Title.ToLower(), workUploadPath);
-                    }
-                    else
-                    {
-   
-                        LoadDataToViewBag();
-                        return View("Create", createModel);
-                    }
-                    if (FileManager.CheckIfFileIsZipped(work))
-                    {
-                        FileManager.UploadFile(work, createModel.Title.ToLower(), workUploadPath);
-                    }
-                    else
-                    {
-                        LoadDataToViewBag();
-                        return View("Create", createModel);
-                    }
+                    this.UploadFile(file, genre.GenreName, author.Name, createModel.Title);
                 }
+
+                var workUploadPath = "UploadedFiles/" + createModel.Genre + "/" + createModel.Author + "/works/" + createModel.Title + "/";
+                var zipFileLink = workUploadPath + createModel.Title + ".zip";
+                var pictureFileLink = workUploadPath + createModel.Title + ".png";
 
                 var newWork = new Work
                 {
-                    AuthorId = createModel.Author,
+                    AuthorId = author.Id,
                     Description = createModel.Description,
-                    GenreId = createModel.Genre,
+                    GenreId = genre.Id,
                     UploadedById = currentUserId,
                     Year = createModel.Year,
                     Title = createModel.Title,
@@ -159,19 +101,22 @@
                 this.Data.Works.Add(newWork);
                 this.Data.SaveChanges();
 
-                var viewModel = this.Data.Works.All().Where(w => w.Id == newWork.Id).Select(WorkDetailsViewModel.FromWork).FirstOrDefault();
+                var viewModel = this.Data.Works.All()
+                    .Where(w => w.Id == newWork.Id)
+                    .Select(WorkDetailsViewModel.FromWork)
+                    .FirstOrDefault();
 
-                TempData["success"] = "Uploaded successfully";
-                return View("Details", viewModel);
+                this.TempData["success"] = "Uploaded successfully";
+                return this.View("Details", viewModel);
             }
 
-            LoadDataToViewBag();
-            return View("Create", createModel);
+            this.LoadDataToViewBag();
+            return this.View("Create", createModel);
         }
 
         public JsonResult GetWorks([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(this.GetAllWorks().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            return this.Json(this.GetAllWorks().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetWorkData(string text)
@@ -200,7 +145,7 @@
                 });
             }
 
-            return Json(matchWords, JsonRequestBehavior.AllowGet);
+            return this.Json(matchWords, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetWorkGenreData()
@@ -212,7 +157,7 @@
                     Genre = x.GenreName
                 });
 
-            return Json(genres, JsonRequestBehavior.AllowGet);
+            return this.Json(genres, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Search(SubmitSearchModel submitModel)
@@ -237,14 +182,64 @@
                 result = result.Where(x => x.Year == submitModel.YearSearch);
             }
 
-
             var endResult = result.Select(WorkListViewModel.FromWork);
 
             var test = endResult.ToList();
 
-            return View(endResult);
+            return this.View(endResult);
         }
 
-      
+        private void UploadFile(HttpPostedFileBase file, string genre, string author, string title)
+        {
+            var workUploadPath = "UploadedFiles/" + genre + "/" + author + "/works/" + title + "/";
+            var zipFileLink = workUploadPath + title + ".zip";
+            var pictureFileLink = string.Empty;
+
+            FileManager.CreateFolderIfDoesntExists("UploadedFiles/" + genre);
+            FileManager.CreateFolderIfDoesntExists("UploadedFiles/" + genre + "/" + author);
+            FileManager.CreateFolderIfDoesntExists("UploadedFiles/" + genre + "/" + author + "/works/");
+            FileManager.CreateFolderIfDoesntExists("UploadedFiles/" + genre + "/" + author + "/works/" + title + "/");
+
+            if (Request.Files.Count > 0 && Request.Files.Count < 3)
+            {
+                if (FileManager.CheckIfFileIsPicture(file))
+                {
+                    pictureFileLink = workUploadPath + title + ".png";
+                    FileManager.UploadFile(file, title.ToLower(), workUploadPath);
+                }
+                else if (FileManager.CheckIfFileIsZipped(file))
+                {
+                    FileManager.UploadFile(file, title.ToLower(), workUploadPath);
+                }
+                else
+                {
+                    throw new ValidationException("Files are not in correct format");
+                }
+            }
+        }
+
+        private void LoadDataToViewBag()
+        {
+            IEnumerable<SelectListItem> authors = this.Data.Authors.All().Select(
+               a => new SelectListItem { Value = a.Name, Text = a.Name });
+
+            IEnumerable<SelectListItem> genres = this.Data.Genres.All().Select(
+              a => new SelectListItem { Value = a.GenreName, Text = a.GenreName });
+
+            this.ViewBag.Year = new SelectList(Enumerable.Range(StartWorkYear, currentYear - StartWorkYear), Enumerable.Range(StartWorkYear, currentYear - StartWorkYear));
+
+            this.ViewBag.Author = authors;
+
+            this.ViewData["Genre"] = genres;
+        }
+
+        private IQueryable<WorkListViewModel> GetAllWorks()
+        {
+            var allWorks = this.Data.Works
+                .All()
+                .Select(WorkListViewModel.FromWork);
+
+            return allWorks;
+        }
     }
 }

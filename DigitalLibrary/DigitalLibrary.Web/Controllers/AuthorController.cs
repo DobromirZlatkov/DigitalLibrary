@@ -1,15 +1,13 @@
-﻿using DigitalLibrary.Data;
-using DigitalLibrary.Models;
-using DigitalLibrary.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-
-namespace DigitalLibrary.Web.Controllers
+﻿namespace DigitalLibrary.Web.Controllers
 {
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+
+    using DigitalLibrary.Data;
+    using DigitalLibrary.Models;
+    using DigitalLibrary.Web.Models;
+
     public class AuthorController : BaseController
     {
         public AuthorController(ILibraryData data)
@@ -17,16 +15,7 @@ namespace DigitalLibrary.Web.Controllers
         {
         }
 
-        private IQueryable<AuthorListViewModel> GetAllAuthors()
-        {
-            var allAuthors = this.Data.Authors
-                .All()
-                .Select(AuthorListViewModel.FromAuthor);
-
-            return allAuthors;
-        }
-
-       public ActionResult Create(AuthorCreateModel model)
+        public ActionResult Create(AuthorCreateModel model)
         {
             var ifExists = this.Data.Authors.All().Any(a => a.Name.ToLower() == model.AuthorName.ToLower());
 
@@ -39,11 +28,21 @@ namespace DigitalLibrary.Web.Controllers
 
                 this.Data.Authors.Add(newAuthor);
                 this.Data.SaveChanges();
-                return View("")//to return authordropdown list view
 
+                Response.Redirect("work/create");
+                return this.View("create");
             }
-           
+
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ModelState.Values.First().ToString());
+        }
+
+        private IQueryable<AuthorListViewModel> GetAllAuthors()
+        {
+            var allAuthors = this.Data.Authors
+                .All()
+                .Select(AuthorListViewModel.FromAuthor);
+
+            return allAuthors;
         }
     }
 }

@@ -325,6 +325,7 @@
     <Content Include="Views\Work\Details.cshtml" />
     <Content Include="Views\Shared\_CommentPartial.cshtml" />
     <Content Include="Views\TrustedUserWork\List.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DropDownListTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

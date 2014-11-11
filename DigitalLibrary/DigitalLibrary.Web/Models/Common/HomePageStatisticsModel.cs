@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace DigitalLibrary.Web.Models
+﻿namespace DigitalLibrary.Web.Models
 {
     public class HomePageStatisticsModel
     {
@@ -14,6 +9,5 @@ namespace DigitalLibrary.Web.Models
         public int NumberOfGenres { get; set; }
 
         public int NumberOfWorks { get; set; }
-
     }
 }
