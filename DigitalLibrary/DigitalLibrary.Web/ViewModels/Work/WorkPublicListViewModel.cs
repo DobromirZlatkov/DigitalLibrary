@@ -3,8 +3,13 @@
     using System;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Web;
+    using System.Reflection;
+    using System.IO;
 
     using DigitalLibrary.Models;
+    using DigitalLibrary.Logic;
+   
 
     public class WorkPublicListViewModel
     {
@@ -43,6 +48,7 @@
 
         private int PositiveLikes { get; set; }
 
+<<<<<<< HEAD:DigitalLibrary/DigitalLibrary.Web/ViewModels/Work/WorkPublicListViewModel.cs
         private int NegativeLikes { get; set; }
 
         public int LikesCount
@@ -52,5 +58,11 @@
                 return this.PositiveLikes - this.NegativeLikes;
             }
         }
+=======
+        public int LikesCount { get; set; }
+
+       // private int NegativeLikes { get; set; }
+
+>>>>>>> parent of 18492b8... Added role manager and did some role logic:DigitalLibrary/DigitalLibrary.Web/Models/Work/WorkListViewModel.cs
     }
 }

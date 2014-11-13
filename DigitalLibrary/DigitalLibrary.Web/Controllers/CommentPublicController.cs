@@ -1,5 +1,16 @@
-﻿namespace DigitalLibrary.Web.Controllers
+﻿using DigitalLibrary.Data;
+using DigitalLibrary.Web.Models.Comments;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using DigitalLibrary.Models;
+
+namespace DigitalLibrary.Web.Controllers
 {
+<<<<<<< HEAD:DigitalLibrary/DigitalLibrary.Web/Controllers/CommentPublicController.cs
     using System;
     using System.Net;
     using System.Linq;
@@ -14,6 +25,9 @@
 
 
     public class CommentPublicController : BaseController
+=======
+    public class CommentController : BaseController
+>>>>>>> parent of 18492b8... Added role manager and did some role logic:DigitalLibrary/DigitalLibrary.Web/Controllers/CommentController.cs
     {
         public CommentPublicController(IDigitalLibraryData data)
             : base(data)
@@ -39,9 +53,14 @@
 
                 this.Data.SaveChanges();
 
+<<<<<<< HEAD:DigitalLibrary/DigitalLibrary.Web/Controllers/CommentPublicController.cs
                 var viewModel = new CommentPublicViewModel { PostedBy = username, Content = commentModel.Content };
 
                 return this.PartialView("_CommentPartial", viewModel);
+=======
+                var viewModel = new CommentViewModel { PostedBy = username, Content = commentModel.Content };
+                return PartialView("_CommentPartial", viewModel);
+>>>>>>> parent of 18492b8... Added role manager and did some role logic:DigitalLibrary/DigitalLibrary.Web/Controllers/CommentController.cs
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ModelState.Values.First().ToString());

@@ -1,23 +1,34 @@
+<<<<<<< HEAD
 ﻿namespace DigitalLibrary.Data.Logic
-{
-    using System.IO;
-    using System.Web;
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+using System.IO;
+using System.IO.Compression;
 
+namespace DigitalLibrary.Logic
+>>>>>>> parent of 18492b8... Added role manager and did some role logic
+{
     public static class FileManager
     {
+        
         public static void DeleteFile(string path)
         {
             var fullPath = HttpContext.Current.Server.MapPath("~/" + path);
             var dir = new DirectoryInfo(fullPath);
-            if (dir.Exists)
-            {
-                dir.Delete(true);
-            }
+            dir.Delete(true);
         }
+
 
         public static bool CheckIfFileExists(string filePath)
         {
-            return File.Exists(HttpContext.Current.Server.MapPath("~/" + filePath));
+           return File.Exists(HttpContext.Current.Server.MapPath("~/" + filePath));
         }
 
         public static void CreateFolderIfDoesntExists(string foderPath)
@@ -55,13 +66,14 @@
                 }
                 else if (CheckIfFileIsZipped(file))
                 {
+
                     var fileSaveName = fileName + extension;
 
                     var path = Path.Combine(HttpContext.Current.Server.MapPath("~/" + uploadPath + "/"), fileSaveName);
 
-                    file.SaveAs(path);
+                    file.SaveAs(path); 
                 }
-            }
+            }  
         }
 
         public static bool CheckIfFileIsPicture(HttpPostedFileBase file)
@@ -69,8 +81,8 @@
             var extension = Path.GetExtension(file.FileName);
             extension = extension.ToLower();
 
-            if (extension == ".jpg"
-                || extension == ".png"
+            if (extension == ".jpg" 
+                || extension ==".png" 
                 || extension == ".jpeg"
                 || extension == ".gif")
             {
@@ -85,7 +97,9 @@
             var extension = Path.GetExtension(file.FileName);
             extension = extension.ToLower();
 
-            if (extension == ".zip" || extension == ".rar")
+            if (extension == ".zip"
+                || extension == ".rar"
+                )
             {
                 return true;
             }

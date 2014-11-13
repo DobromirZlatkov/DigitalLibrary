@@ -5,7 +5,7 @@
         public static double CalculatePersentage(int firstNumber, int secondNumber)
         {
             double allUploads = (double)firstNumber + (double)secondNumber;
-            if (allUploads > 0)
+            if(allUploads > 0)
             {
                 double rating = ((double)secondNumber / allUploads) * 100;
                 return rating;

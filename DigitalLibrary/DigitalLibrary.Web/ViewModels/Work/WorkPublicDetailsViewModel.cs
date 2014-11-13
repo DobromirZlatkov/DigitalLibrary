@@ -1,3 +1,4 @@
+<<<<<<< HEAD:DigitalLibrary/DigitalLibrary.Web/ViewModels/Work/WorkPublicDetailsViewModel.cs
 ﻿namespace DigitalLibrary.Web.ViewModels.Work
 {
     using System;
@@ -9,6 +10,21 @@
     using DigitalLibrary.Web.ViewModels.Comment;
 
     public class WorkPublicDetailsViewModel
+=======
+﻿using DigitalLibrary.Logic;
+using DigitalLibrary.Models;
+using DigitalLibrary.Web.Models.Comments;
+using Microsoft.Ajax.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web;
+
+namespace DigitalLibrary.Web.Models
+{
+    public class WorkDetailsViewModel
+>>>>>>> parent of 18492b8... Added role manager and did some role logic:DigitalLibrary/DigitalLibrary.Web/Models/Work/WorkDetailsViewModel.cs
     {
         public static Expression<Func<Work, WorkPublicDetailsViewModel>> FromWork
         {
@@ -66,5 +82,6 @@
                 return this.PositiveLikes - this.NegativeLikes;
             }
         }
+   
     }
 }

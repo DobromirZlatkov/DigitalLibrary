@@ -44,6 +44,7 @@
     }
 
 </div>
+<<<<<<< HEAD:DigitalLibrary/DigitalLibrary.Web/Views/WorkPublic/Details.cshtml
 <div>
     @if (User.Identity.IsAuthenticated)
     {
@@ -54,10 +55,22 @@
             @Html.AntiForgeryToken()
             <input type="submit" value="Submit comment" />
         }
+=======
+
+@if (User.Identity.IsAuthenticated)
+{
+    using (Ajax.BeginForm("PostComment", "Comment", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "Comments" , OnSuccess="clearText"}))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("WorkId", Model.Id)
+        @Html.TextArea("Content", new { id="comment-content-textarea"})
+        <input type="submit" value="Submit comment" />
+>>>>>>> parent of 18492b8... Added role manager and did some role logic:DigitalLibrary/DigitalLibrary.Web/Views/Work/Details.cshtml
     }
 
 </div>
 @section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script>
 
         function clearText() {

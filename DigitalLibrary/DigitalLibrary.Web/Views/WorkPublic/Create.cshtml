@@ -6,9 +6,6 @@
 
 @{
     var currentYear = DateTime.Now.Year;
-    var genres = @ViewData["Genre"];
-    var years = @ViewBag.Year;
-    var authors = @ViewBag.Author;
 }
 
 @using (Html.BeginForm("Upload", "WorkPublic", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -17,7 +14,11 @@
     @Html.ValidationSummary(true)
 
     <div>
+<<<<<<< HEAD:DigitalLibrary/DigitalLibrary.Web/Views/WorkPublic/Create.cshtml
         @Html.LabelFor(m => m.Title, "Title: ", new { id = "title-input" })
+=======
+        @Html.LabelFor(m => m.Title, "Title: ")
+>>>>>>> parent of 18492b8... Added role manager and did some role logic:DigitalLibrary/DigitalLibrary.Web/Views/Work/Create.cshtml
         @Html.EditorFor(m => m.Title)
         @Html.ValidationMessageFor(m => m.Title, String.Empty, new { @class = "help-inline", @style = "color:red" })
     </div>
@@ -28,31 +29,48 @@
     </div>
     <div>
         @Html.LabelFor(m => m.Year, "Year : ")
+<<<<<<< HEAD:DigitalLibrary/DigitalLibrary.Web/Views/WorkPublic/Create.cshtml
         @Html.DropDownList("Year");
+=======
+        @Html.DropDownList("Year")
+>>>>>>> parent of 18492b8... Added role manager and did some role logic:DigitalLibrary/DigitalLibrary.Web/Views/Work/Create.cshtml
         @Html.ValidationMessageFor(m => m.Year, String.Empty, new { @class = "help-inline", @style = "color:red" })
     </div>
     <div>
         @Html.LabelFor(m => m.Genre, "Genre : ")
+<<<<<<< HEAD:DigitalLibrary/DigitalLibrary.Web/Views/WorkPublic/Create.cshtml
         @Html.DropDownList("Genre");
     </div>
     <div id="authors-dropdown-container">
         @Html.LabelFor(m => m.Author, "Author name: ")
         @Html.DropDownList("Author");
+=======
+        @Html.DropDownList("Genre")
+    </div>
+    <div id="authors-dropdown-container">
+        @Html.LabelFor(m => m.Author, "Author name: ")
+        @Html.DropDownList("Author")
+>>>>>>> parent of 18492b8... Added role manager and did some role logic:DigitalLibrary/DigitalLibrary.Web/Views/Work/Create.cshtml
         @Html.ValidationMessageFor(m => m.Author, String.Empty, new { @class = "help-inline", @style = "color:red" })
     </div>
 
     <div>
+<<<<<<< HEAD:DigitalLibrary/DigitalLibrary.Web/Views/WorkPublic/Create.cshtml
         Select Work Picture :<input type="file" name="files" accept=".jpeg , .jpg, .png" />
+=======
+        Select Work Picture :<input type="file" name="file" accept=".jpeg , .jpg, .png" />
+>>>>>>> parent of 18492b8... Added role manager and did some role logic:DigitalLibrary/DigitalLibrary.Web/Views/Work/Create.cshtml
     </div>
 
     <div>
-        Select Work :<input type="file" name="files" accept=".rar , .zip" />
+        Select Work :<input type="file" name="file" accept=".rar , .zip" />
     </div>
 
     <div>
         <input type="submit" name="upload" />
     </div>
 }
+<<<<<<< HEAD:DigitalLibrary/DigitalLibrary.Web/Views/WorkPublic/Create.cshtml
 
 <div>
     <input type="button" name="show-createAuthor-form" class="btn-sm" id="show-createAuthor-form" value="Add new Author" />
@@ -71,6 +89,26 @@
         <input type="submit" value="Submit author" />
     }
 </div>
+=======
+ 
+    <div>
+        <input type="button" name="show-createAuthor-form" class="btn-sm" id="show-createAuthor-form" value="Add new Author"/>
+    </div>
+    
+    <div id="createauthor-form" style="display:none">
+        @using (Ajax.BeginForm("Create", "Author", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "Author" }))
+        {
+            <h3>Create author</h3>
+            <div>
+                @Html.Label("Author Name")
+                @Html.Editor("AuthorName")
+            </div>
+    
+            @Html.AntiForgeryToken()
+            <input type="submit" value="Submit author" />
+        }
+    </div>
+>>>>>>> parent of 18492b8... Added role manager and did some role logic:DigitalLibrary/DigitalLibrary.Web/Views/Work/Create.cshtml
 
 <script>
     (function () {

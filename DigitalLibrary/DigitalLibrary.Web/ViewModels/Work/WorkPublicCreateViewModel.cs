@@ -1,8 +1,20 @@
+<<<<<<< HEAD:DigitalLibrary/DigitalLibrary.Web/ViewModels/Work/WorkPublicCreateViewModel.cs
 ﻿namespace DigitalLibrary.Web.ViewModels.Work
 {
     using System.ComponentModel.DataAnnotations;
 
     public class WorkPublicCreateViewModel
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace DigitalLibrary.Web.Models
+{
+    public class WorkCreateViewModel
+>>>>>>> parent of 18492b8... Added role manager and did some role logic:DigitalLibrary/DigitalLibrary.Web/Models/Work/WorkCreateViewModel.cs
     {
         [Required]
         [StringLength(100, MinimumLength = 5, ErrorMessage = "Use 5-100 characters")]
@@ -16,9 +28,10 @@
         public int Year { get; set; }
 
         [Required]
-        public string Author { get; set; }
+        public int Author { get; set; }
 
         [Required]
-        public string Genre { get; set; }
+        public int Genre { get; set; }
+
     }
 }
