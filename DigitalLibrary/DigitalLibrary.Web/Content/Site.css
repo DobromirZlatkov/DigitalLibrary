@@ -22,33 +22,36 @@ select,
 textarea {
     max-width: 280px;
 }
-.rating-container{
-    width:85%;
-    height:5px;
-    border:1px outset green;
-    margin-left: 10px;
+.home-page-line-container{
+    width: 1000px;
+    height:363px;
+    overflow-x:scroll;
+    overflow-y:hidden;
+      border:10px solid;
+      border-top-color:#856036;
+  border-left-color:#5d4426;
+  border-bottom-color:#856036;
+  border-right-color:#5d4426;
 }
-.rating-bar{
-    background-color:green;
-    height:100%;
-    width:0;
+.list-work-picture{
+    width:150px;
+    height:200px;
+    display:inline-block;
 }
-.hoover-pop img{
-     width:100%;
-    height:60%;
+.hoover-pop{
+    height:270px;
 }
-.hoover-pop img:hover{
-    width:99%;
-    height:61%;
-}
-.home-page-list{
-    width:230px;
-    height:260px;
-}
-.list-page-list{
-    margin-bottom:20px;
+.hoover-pop:hover{
+    width:187px;
 }
 
+.dowload-button{
+    width:190px;
+    height:30px;
+}
+.width-fixed{
+    width:190px;
+}
+.home-page-line-container{
 
-
-
+}

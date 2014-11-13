@@ -8,9 +8,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using DigitalLibrary.Web.Models;
+using DigitalLibrary.Web.ViewModels;
 using DigitalLibrary.Models;
-using DigitalLibrary.Data;
+using DigitalLibrary.Web.ViewModels.Users;
+using DigitalLibrary.Web.Models;
 
 namespace DigitalLibrary.Web.Controllers
 {
@@ -18,7 +19,6 @@ namespace DigitalLibrary.Web.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
-       // private LibraryDbContext Data = new LibraryDbContext();
 
         public AccountController()
         {
@@ -42,9 +42,7 @@ namespace DigitalLibrary.Web.Controllers
             }
         }
 
-
-        
-
+        //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)

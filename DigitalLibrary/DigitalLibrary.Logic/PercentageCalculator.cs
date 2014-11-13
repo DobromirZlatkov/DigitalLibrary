@@ -1,4 +1,4 @@
-﻿namespace DigitalLibrary.Logic
+﻿namespace DigitalLibrary.Data.Logic
 {
     public static class PercentageCalculator
     {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DigitalLibrary.Web.App_Start;
+using DigitalLibrary.Web.Infrastructure.Mapping;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,8 +14,8 @@ namespace DigitalLibrary.Web
     {
         protected void Application_Start()
         {
-            ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(new RazorViewEngine());
+            ViewEnginesConfiguration.RegisterViewEngines(ViewEngines.Engines);
+            AutoMapperConfig.Execute();
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

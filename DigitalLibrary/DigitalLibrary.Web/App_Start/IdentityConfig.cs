@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using DigitalLibrary.Web.Models;
+using DigitalLibrary.Web.ViewModels;
 using DigitalLibrary.Models;
 using DigitalLibrary.Data;
 
@@ -44,7 +44,7 @@ namespace DigitalLibrary.Web
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<LibraryDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<DigitalLibraryDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<User>(manager)
             {
@@ -55,7 +55,7 @@ namespace DigitalLibrary.Web
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 6,
+                RequiredLength = 2,
                 RequireNonLetterOrDigit = false,
                 RequireDigit = false,
                 RequireLowercase = false,

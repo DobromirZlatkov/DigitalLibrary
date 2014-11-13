@@ -7,19 +7,18 @@
     using DigitalLibrary.Data;
     using DigitalLibrary.Models;
     using DigitalLibrary.Web.Models;
+    using DigitalLibrary.Web.ViewModels.Author;
 
     public class AuthorController : BaseController
     {
-        public AuthorController(ILibraryData data)
+        public AuthorController(IDigitalLibraryData data)
             : base(data)
         {
         }
 
-        public ActionResult Create(AuthorCreateModel model)
+        public ActionResult Create(AuthorPublicCreateModel model)
         {
-            var ifExists = this.Data.Authors.All().Any(a => a.Name.ToLower() == model.AuthorName.ToLower());
-
-            if (!ifExists)
+            if (ModelState.IsValid)
             {
                 var newAuthor = new Author
                 {
@@ -36,11 +35,12 @@
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ModelState.Values.First().ToString());
         }
 
-        private IQueryable<AuthorListViewModel> GetAllAuthors()
+        private IQueryable<AuthorPublicListViewModel> GetAllAuthors()
         {
             var allAuthors = this.Data.Authors
                 .All()
-                .Select(AuthorListViewModel.FromAuthor);
+                .Where(a => !a.IsDeleted)
+                .Select(AuthorPublicListViewModel.FromAuthor);
 
             return allAuthors;
         }

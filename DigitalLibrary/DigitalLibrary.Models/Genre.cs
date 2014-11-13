@@ -1,16 +1,19 @@
 ﻿namespace DigitalLibrary.Models
 {
+    using DigitalLibrary.Data.Contracts;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
-    public class Genre
+    public class Genre : DeletableEntity
     {
         private ICollection<Work> works;
 
         public Genre()
         {
-            this.Works = new HashSet<Work>();
+            this.works = new HashSet<Work>();
         }
 
+        [Key]
         public int Id { get; set; }
 
         public string GenreName { get; set; }

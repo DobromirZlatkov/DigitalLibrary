@@ -5,7 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using DigitalLibrary.Web.Models;
+using DigitalLibrary.Web.ViewModels;
 using DigitalLibrary.Data;
 using DigitalLibrary.Models;
 
@@ -17,7 +17,7 @@ namespace DigitalLibrary.Web
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(LibraryDbContext.Create);
+            app.CreatePerOwinContext(DigitalLibraryDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 

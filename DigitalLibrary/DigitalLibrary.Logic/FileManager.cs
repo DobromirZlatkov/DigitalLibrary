@@ -1,4 +1,4 @@
-﻿namespace DigitalLibrary.Logic
+﻿namespace DigitalLibrary.Data.Logic
 {
     using System.IO;
     using System.Web;

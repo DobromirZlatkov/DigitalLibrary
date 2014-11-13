@@ -16,8 +16,24 @@ namespace DigitalLibrary.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "DigitalLibrary.Web.Controllers" }
             );
+
+            routes.MapRoute(
+              name: "Admin",
+              url: "{area}/{controller}/{action}/{id}",
+              defaults: new {area="Admonistration", controller = "Home", action = "Index", id = UrlParameter.Optional },
+              namespaces: new[] { "DigitalLibrary.Web.Areas.Administration" }
+          );
+
+
+            routes.MapRoute(
+               name: "StaticPages",
+               url: "{action}",
+               defaults: new { controller = "Home" },
+               namespaces: new[] { "DigitalLibrary.Web.Controllers" }
+           );
         }
     }
 }

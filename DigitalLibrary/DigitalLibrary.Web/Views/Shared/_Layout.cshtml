@@ -4,64 +4,48 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-
+    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
-    @Styles.Render("~/Content/css", "~/Content/kendo")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/kendo")
+    @RenderSection("styles", required: false)
+    @Styles.Render("~/Content/custom")
 
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
+                </button>       
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav" id="MainMenu">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Works", "List", "Work")</li>
+                <ul class="nav navbar-nav">
+                    <li>@Html.RouteLink("Home", "Default", new { action = "Index", controller = "Home" }, null)</li>
+                    <li>@Html.RouteLink("Works", "Default", new { action = "List", controller = "WorkPublic" }, null)</li>
                     @if (Request.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Upload", "Create", "Work")</li>
+                        <li>@Html.RouteLink("Upload", "Default", new { action = "Create", controller = "WorkPublic" }, null)</li>
+                        <li>@Html.RouteLink("TrustedUser", "Default", new { action = "List", controller = "TrustedUserWork" }, null)</li>
+                        <li>@Html.RouteLink("Admin route", "Admin", new {area="Administration/Home", action = "Index", controller = "Home" }, null)</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
-    </nav>
-    @if (TempData["error"] != null)
-    {
-        <div class="alert alert-danger">@TempData["error"]</div>
-        TempData["error"] = null;
-    }
-    @if (TempData["success"] != null)
-    {
-        <div class="alert alert-success">@TempData["success"]</div>
-        TempData["success"] = null;
-    }
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
+            <p>&copy; @DateTime.Now.Year - Digital Library By Dobromir Zlatkov †</p>
     </div>
-
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/kendo")
-    @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
-    <script type="text/javascript">
-        $("#MainMenu").kendoMenu();
-        (function (e) {
-            $(".alert").delay(3000).fadeOut('slow');
-        }());
-    </script>
-
 </body>
-
 </html>

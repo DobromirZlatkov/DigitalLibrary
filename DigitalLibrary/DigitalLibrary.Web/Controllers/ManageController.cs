@@ -6,8 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using DigitalLibrary.Web.Models;
+using DigitalLibrary.Web.ViewModels;
 using DigitalLibrary.Models;
+using DigitalLibrary.Web.Models.Manage;
 
 namespace DigitalLibrary.Web.Controllers
 {
