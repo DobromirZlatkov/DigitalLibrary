@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="jumbotron">
+    <h1>Digital Library</h1>
+   @Html.Action("Statistics")
+
+    <div id="list-top-users">
+        <h3>Top ten rated users</h3>
+      @Html.Action("TopUsers")
+    </div>
+</div>
+<div class="row">
+    <div class="paddle page_left carousel_prev" data-track="carousel:previous"><div class="paddle_sprite paddle_left_sprite"></div></div>
+    <div class="col-lg-11">
+        <h3 class="bolder">Most Popular Works</h3>
+        @Html.Action("TopWorks")
+        <br />
+        <br />
+        <br />
+        @Html.Action("Genres")
+    </div>
+</div>

@@ -1,0 +1,115 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.home-page-line-container{
+    width: 1000px;
+    height:363px;
+    overflow-x: auto;
+    overflow-y:scroll;
+      border:10px solid;
+      border-top-color:#856036;
+  border-left-color:#5d4426;
+  border-bottom-color:#856036;
+  border-right-color:#5d4426;
+}
+.list-work-picture{
+    width:150px;
+    height:200px;
+    display:inline-block;
+}
+.hoover-pop{
+    height:270px;
+}
+.hoover-pop:hover{
+    width:187px;
+}
+
+.dowload-button{
+    width:190px;
+    height:30px;
+}
+.width-fixed{
+    width:190px;
+    text-align:center;
+}
+body{
+    background:url("../Images/library-basement.jpg") no-repeat center center fixed;
+}
+.control-label{
+    color:white;
+}
+h2, h3, h4, footer, h1, p, div{
+    color:white;
+}
+.jumbotron{
+    background : rgba(30, 27, 27, 0.8)
+}
+.comment{
+    color:black;
+}
+.rating-container{
+    border: 1px solid white;
+    width:90%;
+    padding:0;
+    margin:0;
+}
+.rating-bar{
+    height:10px;
+    background:red;
+    padding:0;
+    margin:0;
+}
+.bolder{
+    font-weight:bolder;
+    font-size:36px;
+}
+.tr-width-200{
+    width:30px;
+}
+.container body-content{
+    width:100%;
+    margin:0;
+}
+#work-votes{
+    font-size:x-large;
+}
+#heigth-fixed{
+    width: 312px;
+   height: 287px;
+}
+.comment-container{
+    background-color:rgba(182, 161, 79, 0.7);
+}
+.test{
+    white-space: nowrap;
+    float:left;
+    text-align:justify;
+    text-overflow:ellipsis;
+}
+#desctiption-details-text {
+    height: 400px;
+    width: 300px;
+    display:block;
+    word-wrap:break-word;
+}
